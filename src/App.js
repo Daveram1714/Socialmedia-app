@@ -17,24 +17,20 @@ const App = () => {
           <ul>
             <li><Link to='/'>Home</Link> </li>
             <li><Link to='/about'>about</Link> </li>
-            <li><Link to='/newpost'>new post</Link></li>
-            <li><Link to= '/postpage'>post page</Link> </li>
-
+            <li><Link to ='/postpage'> PostPage</Link> </li>
           </ul>
-
         </nav>
-
 
       <Routes>
         <Route path='*' element ={<Missing />} />
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
-      <Route path='/postpage'> 
-        <Route index element={<PostPage/>}/>
-        <Route path=':id' element = {<Post />} />
-      </Route>
-        <Route path='/newpost' element={<NewPost/>}/>
-      
+        <Route path='/newpost' element ={<NewPost />} />     
+        <Route path ='/postpage'>
+              <Route index element = {<PostPage />} /> 
+              <Route path='newpost' element = {<NewPost />} /> 
+              <Route path=':id' element = {<Post />} /> 
+        </Route>
       </Routes>
 
       {/* <Header />
