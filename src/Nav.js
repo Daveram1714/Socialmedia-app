@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Nav = ({search,setSearch}) => {
   return (
     <nav className='Nav' >
-      <form onSubmit={(e)=> e.preventDefault()}>
+      <form className='searchForm' onSubmit={(e)=> e.preventDefault()}>
       <label>Search Post</label>
       <input type = 'text'
       id = 'search'
@@ -11,7 +12,14 @@ const Nav = ({search,setSearch}) => {
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       />
-      </form>        
+      </form> 
+
+      <ul>
+        <li><Link to="/">Home</Link> </li>
+        <li><Link to="about">About</Link> </li>
+        <li><Link to="post">Post</Link> </li>
+      </ul>
+
     </nav>
 )
 }
