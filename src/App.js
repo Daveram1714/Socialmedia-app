@@ -7,6 +7,8 @@ import PostPage from './PostPage'
 import About from './About'
 import Missing from './Missing'
 import Footer from './Footer'
+import {format} from 'date-format'
+
 
 const App = () => {
   const[posts,setPosts] = useState([
@@ -44,6 +46,26 @@ const App = () => {
 
 const[search,setSearch] =useState('')
 const[searchResults,setSearchResults] = useState([])
+const[postTitle,setPostTitle] = useState()
+const[postBody,setPostBody] = useState()
+const handelSubmit = (e) => {
+  e.preventDefault()
+  const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
+  const datetime = format(new Date() , "MMMM dd, YYYY pp")
+  const newpost = {
+    id : id,
+    title : postTitle,
+    datetime :datetime,
+    body : postBody
+  } 
+  const allpost = [...posts,newpost];
+  setPosts(allpost)
+  setPostTitle('')
+  setPostBody('')
+  navigator('/')
+}
+
+
 return(
   <div className='App'>
 
@@ -57,7 +79,13 @@ return(
         <Home 
         posts= {posts}
        />
-        <NewPost />
+        <NewPost 
+        postTitle = {postTitle}
+        postBody = {postBody}
+        setPostTitle ={setPostTitle}
+        setPostBody = {setPostBody}
+        handelSubmit={ handelSubmit}
+        />
         <PostPage />
         <About />
         <Missing />
