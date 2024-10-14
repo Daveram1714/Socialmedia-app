@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import Nav from './Nav'
 import Home from './Home'
@@ -8,7 +8,9 @@ import About from './About'
 import Missing from './Missing'
 import Footer from './Footer'
 import {format} from 'date-format'
-
+import { Route } from 'react-router-dom'
+import { Routes } from 'react-router-dom'
+import Post from './Post'
 
 const App = () => {
   const[posts,setPosts] = useState([
@@ -48,6 +50,17 @@ const[search,setSearch] =useState('')
 const[searchResults,setSearchResults] = useState([])
 const[postTitle,setPostTitle] = useState()
 const[postBody,setPostBody] = useState()
+
+useEffect(() => {
+  const filterResults = posts.filter((post) => 
+    (post.body.toLowerCase()).includes(search.toLowerCase()) || 
+    (post.title.toLowerCase()).includes(search.toLowerCase())
+  )
+  setSearchResults(filterResults.reverse())
+}, [posts, search])
+
+
+
 const handelSubmit = (e) => {
   e.preventDefault()
   const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
@@ -76,20 +89,33 @@ return(
           search = {search}
           setSearch = {setSearch} 
         />
-        <Home 
-        posts= {posts}
-       />
-        <NewPost 
-        postTitle = {postTitle}
-        postBody = {postBody}
-        setPostTitle ={setPostTitle}
-        setPostBody = {setPostBody}
-        handelSubmit={ handelSubmit}
-        />
-        <PostPage />
-        <About />
-        <Missing />
+
+        <Routes>   
+          <Route path = "/" element = { 
+            <Home 
+            posts= {searchResults}
+          />} />
+
+           <Route path='post' element={  <NewPost 
+            postTitle = {postTitle}
+            postBody = {postBody}
+            setPostTitle ={setPostTitle}
+            setPostBody = {setPostBody}
+            handelSubmit={ handelSubmit}
+            />} />
+            
+            <Route path = 'about' element = {<About />} />
+            <Route path = "*" element = {<Missing />} />
+
+        </Routes>
+
         <Footer /> 
+
+
+
+
+
+
 
   </div>
 )
