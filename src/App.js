@@ -77,6 +77,9 @@ const handelSubmit = (e) => {
   setPostBody('')
   navigator('/')
 }
+const handeldelete =(e)=>{
+
+}
 
 
 return(
@@ -96,14 +99,16 @@ return(
             posts= {searchResults}
           />} />
 
-           <Route path='post' element={  <NewPost 
+           <Route path='post' >  
+           <Route index element={  <NewPost 
             postTitle = {postTitle}
             postBody = {postBody}
             setPostTitle ={setPostTitle}
             setPostBody = {setPostBody}
             handelSubmit={ handelSubmit}
             />} />
-            
+            <Route path='id' element={<PostPage post ={posts} handeldelete = {handeldelete} />} />
+            </Route>
             <Route path = 'about' element = {<About />} />
             <Route path = "*" element = {<Missing />} />
 
