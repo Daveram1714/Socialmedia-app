@@ -10,7 +10,6 @@ import Footer from './Footer'
 import {format} from 'date-format'
 import { Route } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
-import Post from './Post'
 
 const App = () => {
   const[posts,setPosts] = useState([
@@ -107,7 +106,7 @@ return(
             setPostBody = {setPostBody}
             handelSubmit={ handelSubmit}
             />} />
-            <Route path='id' element={<PostPage post ={posts} handeldelete = {handeldelete} />} />
+            <Route path=':id' element={<PostPage post ={posts} handeldelete = {handeldelete} />} />
             </Route>
             <Route path = 'about' element = {<About />} />
             <Route path = "*" element = {<Missing />} />
