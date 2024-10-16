@@ -1,8 +1,7 @@
-import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-const PostPage = ({posts,handeldelete}) => {
-  const { id} = useParams();
+const PostPage = ({posts,handelDelete}) => {
+  const { id } = useParams();
   const post = posts.find(post => (post.id).toString() === id)
 
   return (
@@ -13,7 +12,7 @@ const PostPage = ({posts,handeldelete}) => {
               <h2>{post.title}</h2>
               <p className='postDate'>{post.datetime}</p>
               <p className='postBody'>{post.body}</p>
-              <button onclick ={()=> handeldelete(post.id)}>Delete post</button>
+              <button onclick ={()=> handelDelete(post.id)}>Delete post</button>
             </>
           }
           {!post &&
@@ -33,3 +32,5 @@ const PostPage = ({posts,handeldelete}) => {
 }
 
 export default PostPage
+
+
