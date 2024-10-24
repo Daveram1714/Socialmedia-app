@@ -8,7 +8,7 @@ import About from './About'
 import Missing from './Missing'
 import Footer from './Footer'
 import {format} from 'date-format'
-import { Route } from 'react-router-dom'
+import { Route, useNavigate } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 
 const App = () => {
@@ -49,6 +49,7 @@ const[search,setSearch] =useState('')
 const[searchResults,setSearchResults] = useState([])
 const[postTitle,setPostTitle] = useState()
 const[postBody,setPostBody] = useState()
+const navigate = useNavigate();
 
 useEffect(() => {
   const filterResults = posts.filter((post) => 
@@ -63,26 +64,28 @@ useEffect(() => {
 const handelSubmit = (e) => {
   e.preventDefault()
   const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
-  const datetime = format(new Date() , "MMMM dd, YYYY pp")
+  // const datetime = format(new Date() , "MMMM dd, YYYY pp")
   const newpost = {
-    id : id,
+    id ,
     title : postTitle,
-    datetime :datetime,
+    // datetime,
     body : postBody
-  } 
+  } ;
   const allpost = [...posts,newpost];
   setPosts(allpost)
   setPostTitle('')
   setPostBody('')
-  navigator('/')
+  navigate('/')
 }
+
+
+
 
 const handelDelete =(id)=>{
   const postList = posts.filter(post =>post.id  !== id)
   setPosts(postList)
-
+  navigate('/')
 }
-
 
 return(
   <div className='App'>
@@ -107,7 +110,7 @@ return(
             postBody = {postBody}
             setPostTitle ={setPostTitle}
             setPostBody = {setPostBody}
-            handelSubmit={ handelSubmit}
+            handelSubmit={handelSubmit}
             />} />
             <Route path=':id' element={<PostPage posts ={posts} handelDelete = {handelDelete} />} />
             </Route>
@@ -115,15 +118,7 @@ return(
             <Route path = "*" element = {<Missing />} />
 
         </Routes>
-
-        <Footer /> 
-
-
-
-
-
-
-
+        <Footer />
   </div>
 )
 }

@@ -1,6 +1,7 @@
-import React from 'react'
 
-const NewPost = ({postTitle,postBody,setPostTitle,setPostBody,handelSubmit}) => {
+const NewPost = ({handelSubmit,postBody,postTitle,setPostBody,setPostTitle}) => {
+ 
+
   return (
     <main className='NewPost'>
       <h2>New Post</h2>
@@ -12,7 +13,7 @@ const NewPost = ({postTitle,postBody,setPostTitle,setPostBody,handelSubmit}) => 
           required
           placeholder = "Post Title"
           value = {postTitle}
-          onchange = {(e) => setPostTitle(e.target.value)}
+          onChange = {(e) => setPostTitle(e.target.value)}
           />
 
           <label>Post :</label>
@@ -20,7 +21,7 @@ const NewPost = ({postTitle,postBody,setPostTitle,setPostBody,handelSubmit}) => 
             id='postBody'
             type='text'
             value = {postBody}
-            onchange = {(e) => setPostBody(e.target.value)}
+            onChange = {(e) => setPostBody(e.target.value)}
             />
 
             <button type='submit'> submit</button>
