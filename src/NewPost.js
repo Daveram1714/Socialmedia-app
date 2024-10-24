@@ -1,6 +1,5 @@
 
-const NewPost = ({handelSubmit,postBody,postTitle,setPostBody,setPostTitle}) => {
- 
+const NewPost = ({handelSubmit,postBody,postTitle,setPostBody,setPostTitle}) => { 
 
   return (
     <main className='NewPost'>
@@ -22,7 +21,8 @@ const NewPost = ({handelSubmit,postBody,postTitle,setPostBody,setPostTitle}) => 
             type='text'
             value = {postBody}
             onChange = {(e) => setPostBody(e.target.value)}
-            />
+            /><label>Post Time:</label>
+           
 
             <button type='submit'> submit</button>
       </form>

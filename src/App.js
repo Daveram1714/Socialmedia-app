@@ -7,7 +7,7 @@ import PostPage from './PostPage'
 import About from './About'
 import Missing from './Missing'
 import Footer from './Footer'
-import {format} from 'date-format'
+import { format } from 'date-fns'
 import { Route, useNavigate } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 
@@ -64,11 +64,12 @@ useEffect(() => {
 const handelSubmit = (e) => {
   e.preventDefault()
   const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
-  // const datetime = format(new Date() , "MMMM dd, YYYY pp")
+  const datetime = format(new Date() , "MMMM dd, yyyy pp")
+
   const newpost = {
     id ,
     title : postTitle,
-    // datetime,
+    datetime,
     body : postBody
   } ;
   const allpost = [...posts,newpost];
@@ -111,6 +112,7 @@ return(
             setPostTitle ={setPostTitle}
             setPostBody = {setPostBody}
             handelSubmit={handelSubmit}
+          
             />} />
             <Route path=':id' element={<PostPage posts ={posts} handelDelete = {handelDelete} />} />
             </Route>
