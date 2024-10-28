@@ -5,7 +5,6 @@ const PostPage = ({posts,handelDelete}) => {
   const post = posts.find(post => (post.id).toString() === id)
 
   return (
-<<<<<<< HEAD
     <main className='PostPage'>
       <article className='post'>
           {post &&
@@ -28,11 +27,6 @@ const PostPage = ({posts,handelDelete}) => {
 
       </article>
       
-=======
-    <main>
-        <h1>Post Page</h1>
-        
->>>>>>> main
     </main>
 )
 }
