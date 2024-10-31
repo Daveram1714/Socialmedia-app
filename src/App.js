@@ -52,7 +52,7 @@ useEffect(() => {
 
 
 
-const handelSubmit = (e) => {
+const handelSubmit = async (e) => {
   e.preventDefault()
   const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
   const datetime = format(new Date() , "MMMM dd, yyyy pp")
@@ -63,11 +63,26 @@ const handelSubmit = (e) => {
     datetime,
     body : postBody
   } ;
-  const allpost = [...posts,newpost];
-  setPosts(allpost)
-  setPostTitle('')
-  setPostBody('')
-  navigate('/')
+
+  try {    
+    const responce = await api.post("/posts" , newpost)
+    const allpost = [...posts,responce];
+    setPosts(allpost)
+    setPostTitle('')
+    setPostBody('')
+    navigate('/')
+  } catch (error) {
+    if(responce.error){
+      console.log(error.responce.data);
+      console.log(error.responce.status);
+      console.log(error.responce.Header);
+    }
+    else{
+      console.log(`Error :${error.responce}`);
+      
+    }
+    
+  }
 }
 
 
