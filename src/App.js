@@ -52,33 +52,57 @@ useEffect(() => {
 
 
 
+// const handelSubmit = async (e) => {
+//   e.preventDefault()
+//   const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
+//   const datetime = format(new Date() , "MMMM dd, yyyy pp")
+//   const newpost = {
+//     id ,
+//     title : postTitle,
+//     datetime,
+//     body : postBody
+//   } ;
+//   try {    
+//     const responce = await api.post("/posts" , newpost)
+//     const allpost = [...posts,responce.data];
+//     setPosts(allpost)
+//     setPostTitle('')
+//     setPostBody('')
+//     navigate('/')
+//   } catch (error) {    
+//       console.log(`Error :${error.responce}`);
+//   }
+// }
+
 const handelSubmit = async (e) => {
   e.preventDefault()
-  const id = posts.length ? posts[posts.length -1 ].id +1 : 1 ;
+  const id = posts.length ? parseInt(posts[posts.length - 1].id) + 1 : 1;
   const datetime = format(new Date() , "MMMM dd, yyyy pp")
 
   const newpost = {
-    id ,
-    title : postTitle,
-    datetime,
-    body : postBody
-  } ;
+      id,
+      title: postTitle,
+      datetime,
+      body: postBody
+  };
+
+  console.log('Attempting to post:', newpost); // Debug log
 
   try {    
-    const responce = await api.post("/posts" , newpost)
-    const allpost = [...posts,responce];
-    setPosts(allpost)
-    setPostTitle('')
-    setPostBody('')
-    navigate('/')
+      const response = await api.post("/posts", newpost)
+      console.log('Response:', response.data); // Debug log
+      const allpost = [...posts, response.data];
+      setPosts(allpost)
+      setPostTitle('')
+      setPostBody('')
+      navigate('/')
   } catch (error) {
-    
-      console.log(`Error :${error.responce}`);
-      
-      
+      console.log('Error details:', {
+          message: error.message,
+          response: error.response
+      });
   }
 }
-
 
 
 
