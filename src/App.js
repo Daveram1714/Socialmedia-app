@@ -10,46 +10,37 @@ import Footer from './Footer'
 import { format } from 'date-fns'
 import { Route, useNavigate } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
+import api from "./api/Posts.js"
 
 const App = () => {
-  const[posts,setPosts] = useState([
-    {
-      id : 1,
-      title : "My first post",
-      datetime : "July 01,2021 11: 17 : 36 AM",
-      body : "Make a wish"
-    },
-  {
-    id: 2,
-    title: "My second Post",
-    datetime: "July 02, 2021 12:00:00 AM",
-    body: "This is my second post"
-  },
-  {
-    id: 3,
-    title: "My third Post",
-    datetime: "July 03, 2021 01:00:00 AM",
-    body: "This is my third post"
-  },
-  {
-    id: 4,
-    title: "My fourth Post",
-    datetime: "July 04, 2021 02:00:00 AM",
-    body: "This is my fourth post"
-  },
-  {
-    id: 5,
-    title: "My fifth Post",
-    datetime: "July 05, 2021 03:00:00 AM",
-    body: "This is my fifth post"
-  }
-])        
+  const[posts,setPosts] = useState([])        
 
 const[search,setSearch] =useState('')
 const[searchResults,setSearchResults] = useState([])
 const[postTitle,setPostTitle] = useState()
 const[postBody,setPostBody] = useState()
 const navigate = useNavigate();
+
+
+useEffect(() =>{
+  const fetchPosts = async() =>{
+    try {
+      const responce = await api.get("/posts");
+      setPosts(responce.data);
+    } catch (error) {
+      if(error.responce){
+        console.log(error.responce.data);
+        console.log(error.responce.status);
+        console.log(error.responce.Header);       
+      }
+      else{
+        console.log(`Error :${error.responce}`);        
+      }
+      
+    }
+  }
+  fetchPosts();
+} ,[])
 
 useEffect(() => {
   const filterResults = posts.filter((post) => 
