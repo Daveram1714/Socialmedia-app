@@ -72,16 +72,10 @@ const handelSubmit = async (e) => {
     setPostBody('')
     navigate('/')
   } catch (error) {
-    if(responce.error){
-      console.log(error.responce.data);
-      console.log(error.responce.status);
-      console.log(error.responce.Header);
-    }
-    else{
+    
       console.log(`Error :${error.responce}`);
       
-    }
-    
+      
   }
 }
 
