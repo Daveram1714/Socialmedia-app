@@ -19,7 +19,11 @@ const[search,setSearch] =useState('')
 const[searchResults,setSearchResults] = useState([])
 const[postTitle,setPostTitle] = useState()
 const[postBody,setPostBody] = useState()
+const[editBody,setEditPostBody] = useState()
+const[editTitle,setEditPostTitle] = useState()
+
 const navigate = useNavigate();
+
 
 
 useEffect(() =>{
@@ -78,16 +82,13 @@ const handelSubmit = async (e) => {
   e.preventDefault()
   const id = posts.length ? parseInt(posts[posts.length - 1].id) + 1 : 1;
   const datetime = format(new Date() , "MMMM dd, yyyy pp")
-
   const newpost = {
       id,
       title: postTitle,
       datetime,
       body: postBody
   };
-
   console.log('Attempting to post:', newpost); // Debug log
-
   try {    
       const response = await api.post("/posts", newpost)
       console.log('Response:', response.data); // Debug log
@@ -104,12 +105,42 @@ const handelSubmit = async (e) => {
   }
 }
 
+const handelUpdate = async (id)=>{
+  const datetime  = format(new Date() , "MMMM dd ,yyyy pp")
+  const updatePost = {
+    id,
+    postTitle : editTitle,
+    datetime,
+    postBody: editBody
+  }
+  try {
+    const responce =  await api.put(`/posts/${id}`,updatePost)
+    setPosts(posts.map(post = post.id == id ? {...responce.data} : post))
+    setEditPostBody()
+    setEditPostTitle()
+    navigate("/")
+  } catch (error) {
+    console.log("Error msg :"`${error.message}`);
+    
+  }
+
+}
 
 
-const handelDelete =(id)=>{
-  const postList = posts.filter(post =>post.id  !== id)
-  setPosts(postList)
-  navigate('/')
+
+const handelDelete = async (id)=>{
+  try {
+    await api.delete(`/posts/${id}`)
+
+    const postList = posts.filter(post =>post.id  !== id)
+    setPosts(postList)
+    navigate('/')
+    
+  } catch (error) {
+    console.log("Error Messgae :"  `${error.message}`);
+    
+    
+  }
 }
 
 return(
