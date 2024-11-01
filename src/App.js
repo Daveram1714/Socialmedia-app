@@ -115,7 +115,7 @@ const handelUpdate = async (id)=>{
   }
   try {
     const responce =  await api.put(`/posts/${id}`,updatePost)
-    setPosts(posts.map(post = post.id == id ? {...responce.data} : post))
+    setPosts(posts).map(post => post.id == id ? {...responce.data} : post)
     setEditPostBody()
     setEditPostTitle()
     navigate("/")
