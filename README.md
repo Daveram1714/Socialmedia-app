@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+
+### preview of the site 
+link --> https://daveram1714.github.io/Socialmedia-app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
