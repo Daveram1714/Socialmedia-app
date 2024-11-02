@@ -116,9 +116,9 @@ const handelUpdate = async (id)=>{
   }
   try {
     const responce =  await api.put(`/posts/${id}`,updatePost)
-    setPosts(posts).map(post => post.id === id ? {...responce.data} : post)
-    setEditPostBody()
-    setEditPostTitle()
+    setPosts(posts).map(post => post.id == id ? {...responce.data} : post)
+    setEditPostTitle("")
+    setEditPostBody("")
     navigate("/")
   } catch (error) {
     console.log("Error msg :"`${error.message}`);
@@ -126,6 +126,7 @@ const handelUpdate = async (id)=>{
   }
 
 }
+
 
 
 
