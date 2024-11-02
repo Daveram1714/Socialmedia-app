@@ -11,6 +11,7 @@ import { format } from 'date-fns'
 import { Route, useNavigate } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 import api from "./api/Posts.js"
+import EditPost from './EditPost.js'
 
 const App = () => {
   const[posts,setPosts] = useState([])        
@@ -115,7 +116,7 @@ const handelUpdate = async (id)=>{
   }
   try {
     const responce =  await api.put(`/posts/${id}`,updatePost)
-    setPosts(posts).map(post => post.id == id ? {...responce.data} : post)
+    setPosts(posts).map(post => post.id === id ? {...responce.data} : post)
     setEditPostBody()
     setEditPostTitle()
     navigate("/")
@@ -169,8 +170,18 @@ return(
             handelSubmit={handelSubmit}
           
             />} />
+            
             <Route path=':id' element={<PostPage posts ={posts} handelDelete = {handelDelete} />} />
             </Route>
+            <Route path='/edit/:id' element= {<EditPost
+            posts = {posts}
+            editTitle = {editTitle}
+            editBody = {editBody}
+            setEditPostTitle = {setEditPostTitle}
+            setEditPostBody = {setEditPostBody}
+            handelUpdate={ handelUpdate}
+            />} />
+            <Route path = "edit" element ={<EditPost />} />
             <Route path = 'about' element = {<About />} />
             <Route path = "*" element = {<Missing />} />
 

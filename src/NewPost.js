@@ -23,7 +23,6 @@ const NewPost = ({handelSubmit,postBody,postTitle,setPostBody,setPostTitle}) => 
             onChange = {(e) => setPostBody(e.target.value)}
             /><label>Post Time:</label>
            
-
             <button type='submit'> submit</button>
       </form>
         
