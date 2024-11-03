@@ -12,6 +12,7 @@ import { Route, useNavigate } from 'react-router-dom'
 import { Routes } from 'react-router-dom'
 import api from "./api/Posts.js"
 import EditPost from './EditPost.js'
+import useWindowsize from './hooks/useWindowsize.js'
 
 const App = () => {
   const[posts,setPosts] = useState([])        
@@ -22,7 +23,7 @@ const[postTitle,setPostTitle] = useState()
 const[postBody,setPostBody] = useState()
 const[editBody,setEditPostBody] = useState()
 const[editTitle,setEditPostTitle] = useState()
-
+const{width} = useWindowsize()
 const navigate = useNavigate();
 
 
@@ -150,6 +151,7 @@ return(
 
      <Header 
      title="Social Media app"
+     width = {width}
      />
         <Nav 
           search = {search}
