@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 ### preview of the site 
 link --> https://daveram1714.github.io/Socialmedia-app/
